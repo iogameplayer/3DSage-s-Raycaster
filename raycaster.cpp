@@ -56,7 +56,7 @@ void castRay()
     float DistH=999999,hx=px,hy=py;
     int r,mx,my,mp,dof; float rx,ry,ra,xo,yo,disT;
     ra=pa-DR*(FOV/2); if(ra<0){ra+=2*PI;} if(ra>2*PI){ra-=2*PI;}
-    for(r=0;r<FOV;r++) {
+    for(r=0;r<512;r++) {
         //Horizontal
         dof = 0;
         float aTan = -1 / tan(ra);
@@ -152,9 +152,9 @@ void castRay()
         float ca=pa-ra; if(ca<0){ca+=2*PI;}if(ca>2*PI){ca-=2*PI;} disT=disT*cos(ca);//fisheye fix
         float lineH=(mapS*512)/disT; if(lineH>512){lineH=512;}
         float lineO=250-lineH/2;
-        glLineWidth(8);glBegin(GL_LINES);glVertex2i(r*8+516,lineO);glVertex2i(r*8+516,lineH+lineO);glEnd();
+        glLineWidth(1);glBegin(GL_LINES);glVertex2i(r*1+512,lineO);glVertex2i(r*1+512,lineH+lineO);glEnd();
         // Prepare for next ray
-        ra += DR;
+        ra += (DR/512)*FOV;
         if(ra<0){ra+=2*PI;}if(ra>2*PI){ra-=2*PI;}
     }
 }
